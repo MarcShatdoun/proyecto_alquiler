@@ -1,0 +1,11 @@
+
+<nav>
+    <ul>
+        <% datosVehiculos.forEach(vehiculo => { %>
+            <ul>
+                <a href="/<%=vehiculo.tipo %>"><%=vehiculo.tipo %></a>
+            </ul>
+        <% }) %>
+        
+    </ul>
+</nav>

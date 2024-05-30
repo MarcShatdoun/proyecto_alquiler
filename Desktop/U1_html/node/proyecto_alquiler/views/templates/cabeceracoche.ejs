@@ -1,0 +1,10 @@
+<nav>
+    <% datosVehiculos.forEach(vehiculo => { %>
+        <ul>    
+            <a href="/coche/<%=vehiculo.id_modelo %>"><%=vehiculo.nombre_modelo %></a>
+        </ul>
+    <% }) %>
+</nav>
+
+
+        

@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a, li{
+    list-style: none;
+    text-decoration: none;
+}
+h1{
+    text-align: center;
+}
+nav{
+    background-color: darkblue;
+    padding: 3rem;
+
+    ul{
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
+
+nav ul a{
+    color: aliceblue;
+}
+/*======================== Formulrio ==============================*/ 
+form{
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top:40px ;
+
+    div{
+        display: flex;
+        flex-direction: column;
+        
+        padding: 1rem;
+    }
+}
+
+form fieldset div {
+    label{
+        
+        padding-bottom: 0.5rem;
+        color: rgb(72, 90, 41)   
+    };
+    input{
+        width: 20rem;
+        padding: 0.25rem
+    };
+    
+    
+}
+
+form fieldset div:last-child{
+    display: flex;
+    gap: 20px;
+}
+
+/* ====================== TABLA ====================== */
+
+.container_table{
+    max-width: 1260px;
+    margin: 0 auto;
+
+    table {
+        width: 1260px;
+        border-collapse: collapse;
+        margin-top: 3rem;
+    }
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #d2d2d2;
+}
+
