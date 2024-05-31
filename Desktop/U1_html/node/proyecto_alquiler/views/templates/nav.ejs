@@ -1,10 +1,12 @@
 
 <nav>
     <ul>
-        <% datosVehiculos.forEach(vehiculo => { %>
-            <ul>
+        <li><a href="/">Home</a></li>
+        <% menu.forEach(vehiculo => { %>
+
+            <li>
                 <a href="/<%=vehiculo.tipo %>"><%=vehiculo.tipo %></a>
-            </ul>
+            </li>
         <% }) %>
         
     </ul>

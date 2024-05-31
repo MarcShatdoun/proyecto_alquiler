@@ -19,14 +19,25 @@ const connMySql = mysql.createConnection(configMySql);
 
 router.get('/', (req, res) => {
     const SELECT = "SELECT * FROM modelos";
+    const menuSelect = "SELECT * FROM modelos group by tipo";
 
-    connMySql.query(SELECT, (err, result) => {
+    connMySql.query(menuSelect, (err, result) => {
         
         if(err) throw err;
-        res.render('index', {
-            title: 'Alquiler de vehiculos',
-            datosVehiculos: result
+        menuresult = result
+
+        connMySql.query(SELECT, (err, result) => {
+            
+            if(err) throw err;
+            res.render('index', {
+                title: 'Alquiler de vehiculos',
+                datosVehiculos: result,
+                menu: menuresult
+
+            })
+            
         })
+
     })     
     
 })
@@ -50,6 +61,56 @@ router.get('/formInsert', (req, res) =>{
     res.render('formInsert', {
         title: 'Alquiler de vehiculos'
     })
+})
+
+router.get('/:modelo', (req, res) =>{
+
+    // console.log("/coche"); 
+    const SELECT = `SELECT * FROM modelos WHERE tipo = '${req.params.modelo}'`;
+    const menuSelect = "SELECT * FROM modelos group by tipo";
+
+    connMySql.query(menuSelect, (err, result) => {
+
+        if(err) throw err;
+        menuresult = result
+
+     connMySql.query(SELECT, (err, result) => {
+        
+        if(err) throw err;
+        res.render('modelo', {
+            title: 'Nuestro modelos de coche',
+            datosVehiculos: result,
+            menu: menuresult
+        })
+     }) 
+     
+    })
+})
+
+router.get("/:modelo/:modeloinfo", (req, res) =>{
+    console.log("params", req.params);
+    const SELECT = `SELECT * FROM modelos WHERE id_modelo = '${req.params.modeloinfo} '`;
+    const menuSelect = "SELECT * FROM modelos group by tipo";
+
+    connMySql.query(menuSelect, (err, result) => {
+        if(err) throw err;
+        menuresult = result
+
+     connMySql.query(SELECT, (err, result) => {
+        
+        
+        if(err) throw err;
+        res.render('info_modelo', {
+            title: 'informacion del vehiculo',
+            datosVehiculos: result,
+            menu: menuresult
+        })
+        console.log(result);
+       
+
+     })  
+    })
+  
 })
 
 router.post('/insert', (req, res) => {
@@ -78,41 +139,6 @@ router.post('/update', (req, res) => {
     console.log(update);
 
 })
-
-router.get('/coche', (req, res) =>{
-
-    console.log("/coche");
-    const SELECT = "SELECT * FROM modelos";
-
-    connMySql.query(SELECT, (err, result) => {
-        
-        if(err) throw err;
-        res.render('coche', {
-            title: 'Nuestro modelos de coche',
-            datosVehiculos: result
-        })
-    })     
-})
-
-router.get("/coche/:modelo", (req, res) =>{
-    console.log("params", req.params);
-    const SELECT = `SELECT * FROM modelos WHERE id_modelo = '${req.params.modelo}'`;
-
-    connMySql.query(SELECT, (err, result) => {
-        
-        
-        if(err) throw err;
-        res.render('coche', {
-            title: 'Alquiler de vehiculos',
-            datosVehiculos: result
-        })
-       
-
-    })  
-
-  
-})
-
 
 
 module.exports = router;
