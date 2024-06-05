@@ -1,0 +1,30 @@
+{
+  "name": "uf",
+  "version": "1.0.0",
+  "description": "Filter cards",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcShatdoun/UF1846.git"
+  },
+  "keywords": [
+    "cards",
+    "filter",
+    "white_rabbit"
+  ],
+  "author": "Marc Quimis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarcShatdoun/UF1846/issues"
+  },
+  "homepage": "https://github.com/MarcShatdoun/UF1846#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mysql": "^2.18.1"
+  }
+}

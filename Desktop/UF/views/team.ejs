@@ -1,0 +1,35 @@
+<%- include('./templates/head')%>
+<body>
+<header>
+      <div>
+        <img src="/media/logo/bunny.webp" alt="" />
+        <h1>White Rabbit Inc</h1>
+      </div>
+
+      <%- include('./templates/nav') %>
+</header>
+<main>
+    <h2>Nuestro equipo</h2>
+    <section>
+        <% team.forEach(user =>{ %> 
+            <% if (params === user.apellido) { %>
+                <div class="card <%= user.departamento %>">
+                    <a href="/team/<%= user.apellido %>"><img src="/media/img_customers/<%= user.foto %>" alt=""></a>
+                    <h3><%= user.nombre %> <%= user.apellido %></h3>
+                    <p><%= user.email %></p>
+                    <hr>
+                    <p><%= user.departamento %></p>
+                </div>
+            <% } %>
+        <% }) %>
+        <% if (!team.find(user => params === user.apellido)) { %>
+            <div class="main-error">
+                <h3>Pagina no encontrada</h3>
+                <p>Te sugerimos que revises la dirección o intentarlo de nuevo en unos instantes. <a href="/">Página principal</a></p>
+                <img src="/media/img/oops-og.webp" alt="">
+            </div>
+        <% } %>
+    </section>
+</main>
+
+</body>

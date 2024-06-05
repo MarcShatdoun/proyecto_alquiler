@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router()
 const mysql = require('mysql');
 const path = require('path');
+const { title } = require('process');
 
 const configMySql = {
     host: 'localhost',
@@ -58,12 +59,14 @@ router.get('/stock', (req, res) =>{
 })
 
 router.get('/formInsert', (req, res) =>{
+
+    
     res.render('formInsert', {
         title: 'Alquiler de vehiculos'
     })
 })
 
-router.get('/:modelo', (req, res) =>{
+router.get('/modelo/:modelo', (req, res) =>{
 
     // console.log("/coche"); 
     const SELECT = `SELECT * FROM modelos WHERE tipo = '${req.params.modelo}'`;
@@ -87,7 +90,7 @@ router.get('/:modelo', (req, res) =>{
     })
 })
 
-router.get("/:modelo/:modeloinfo", (req, res) =>{
+router.get('/modelo/:modelo/:modeloinfo', (req, res) =>{
     console.log("params", req.params);
     const SELECT = `SELECT * FROM modelos WHERE id_modelo = '${req.params.modeloinfo} '`;
     const menuSelect = "SELECT * FROM modelos group by tipo";
@@ -112,7 +115,62 @@ router.get("/:modelo/:modeloinfo", (req, res) =>{
     })
   
 })
+router.get('/identificacion/:modeloid', (req, res) =>{
 
+    const IDMODELO = req.params.modeloid;
+
+    res.render('identificacion', {
+        title: 'Alquiler de vehiculos',
+        idmodelo: IDMODELO
+    })
+    
+})
+router.get('/reserva', (req, res) =>{
+    
+    res.render('reserva', {
+        title: 'Alquiler de vehiculos'
+        
+    })
+})
+router.get('/login', (req, res) =>{
+    
+    res.render('login', {
+        title: 'Crea una cuenta'
+        
+    })
+})
+
+router.post('/verificacion', (req, res) =>{
+    
+    const { dni, id } = req.body;
+    const SELECT = `SELECT * FROM clientes WHERE dni = ${dni}`;
+    const SELECTCOCHE = `SELECT * FROM modelos WHERE id_modelo = ${id}`;
+    
+    connMySql.query(SELECTCOCHE, (err, cocheResult) => {
+        if (err) throw err;
+    
+        connMySql.query(SELECT, (err, clienteResult) => {
+            if (err) throw err;
+    
+            if (clienteResult.length !== 0) {
+                res.render('reserva', {
+                    title: 'Reserva a estos precios',
+                    datosCliente: clienteResult,
+                    datosCoche: cocheResult // Aquí convertimos el objeto en un array
+                });
+            } else {
+                res.redirect('login');
+            }
+        });
+    });
+
+
+   
+        
+        
+        
+})
+   
 router.post('/insert', (req, res) => {
     
     const {nombre, personas, puertas, cambio, maletas, tipo, precio } = req.body;
@@ -135,8 +193,6 @@ router.post('/update', (req, res) => {
         if(err) throw err;
         res.redirect('/')
     })
-    
-    console.log(update);
 
 })
 

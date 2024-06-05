@@ -163,4 +163,12 @@ th {
     }
 }
 
+.err404{
+    color: rgb(139, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10rem;
+}
+
 

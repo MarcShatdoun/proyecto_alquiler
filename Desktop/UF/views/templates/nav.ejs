@@ -1,0 +1,8 @@
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <% nav.forEach(user => { %> 
+      <li><a href="/departamento/<%= user.departamento %>"><%= user.departamento %></a></li>
+      <% }) %>
+    </ul>
+  </nav>
